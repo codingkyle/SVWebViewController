@@ -210,6 +210,7 @@
     self.actionBarButtonItem.enabled = !self.mainWebView.isLoading;
     
     UIBarButtonItem *refreshStopBarButtonItem = self.mainWebView.isLoading ? self.stopBarButtonItem : self.refreshBarButtonItem;
+
     
     UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     fixedSpace.width = 5.0f;
@@ -219,36 +220,41 @@
         NSArray *items;
         CGFloat toolbarWidth = 250.0f;
         
+        //Object in the array are displayed from left to right
+        
         if(self.availableActions == 0) {
             toolbarWidth = 200.0f;
             items = [NSArray arrayWithObjects:
                      fixedSpace,
-                     refreshStopBarButtonItem,
-                     flexibleSpace,
-                     self.backBarButtonItem,
-                     flexibleSpace,
                      self.forwardBarButtonItem,
+                     fixedSpace,
+                     self.backBarButtonItem,
+                     fixedSpace,
+                     refreshStopBarButtonItem,
                      fixedSpace,
                      nil];
         } else {
             items = [NSArray arrayWithObjects:
                      fixedSpace,
-                     refreshStopBarButtonItem,
-                     flexibleSpace,
-                     self.backBarButtonItem,
-                     flexibleSpace,
-                     self.forwardBarButtonItem,
-                     flexibleSpace,
                      self.actionBarButtonItem,
+                     fixedSpace,
+                     self.forwardBarButtonItem,
+                     fixedSpace,
+                     self.backBarButtonItem,
+                     fixedSpace,
+                     refreshStopBarButtonItem,
                      fixedSpace,
                      nil];
         }
         
-        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, toolbarWidth, 44.0f)];
+        /*
+         UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, toolbarWidth, 44.0f)];
         toolbar.items = items;
-				toolbar.barStyle = self.navigationController.navigationBar.barStyle;
+        toolbar.barStyle = self.navigationController.navigationBar.barStyle;
         toolbar.tintColor = self.navigationController.navigationBar.tintColor;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
+        */
+        [self.navigationItem setRightBarButtonItems:items];
     } 
     
     else {
